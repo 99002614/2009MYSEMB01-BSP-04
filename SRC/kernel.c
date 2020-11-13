@@ -66,3 +66,31 @@ ssize_t driv_write (struct file *fp, const char __user *buf, size_t len, loff_t 
 	
 	return a;
 }
+int driv_open(struct inode *node, struct file *fp)
+{
+	printk("Inside %s function\n", __FUNCTION__);
+	return 0;
+}
+
+int driv_close(struct inode *node, struct file *fp)
+{
+	printk("Inside %s function\n", __FUNCTION__);
+	return 0;
+}
+
+struct file_operations driv_fop={
+.owner=THIS_MODULE,
+.open=driv_open,
+.write=driv_write,
+.read=driv_read,
+.release=driv_close,
+};
+
+int driv_init(void)
+{
+printk("welcome driv\n", __FUNCTION__);
+register_chrdev(257,"mad",&driv_fop);
+pbuffer = kmalloc(MAX_SIZE, GFP_KERNEL);
+kfifo_init(&k,pbuffer,MAX_SIZE);
+return(0);
+}
