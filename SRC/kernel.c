@@ -94,3 +94,13 @@ pbuffer = kmalloc(MAX_SIZE, GFP_KERNEL);
 kfifo_init(&k,pbuffer,MAX_SIZE);
 return(0);
 }
+void driv_exit(void)
+{
+printk("bye driv\n", __FUNCTION__);
+//kfree(pbuffer);  no need to call 
+kfifo_free(&k);
+unregister_chrdev(257,"mad");
+}
+
+module_init(driv_init);
+module_exit(driv_exit);
