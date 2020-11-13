@@ -8,5 +8,14 @@
 
 
 
+**Use case diagram 2**
+
+
+![image](https://user-images.githubusercontent.com/71481122/99042715-3d22da00-25b3-11eb-8b42-395f49336c3d.png)
+
+
+
+
+
 
 
