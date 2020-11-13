@@ -277,4 +277,30 @@ sleep(1);
 pthread_create(&thread_id2, NULL, player_two, NULL); 
 pthread_join(thread_id2, NULL);
 
+printf("\nposition of %s is %d \nposition of %s is %d\n\n",p1,pos1,p2,pos2);
 	
+	int oldpos1=pos1;
+	int oldpos2=pos2;
+
+	
+	if(oldpos1==oldpos2)
+	{
+	b[(l-(oldpos2*3))]=c[(l-(oldpos2*3))];b[(l-(oldpos1*3))+1]=c[(l-(oldpos1*3))+1];
+	}
+	
+	else
+	{
+	b[(l-(oldpos1*3))]=c[(l-(oldpos1*3))];b[(l-(oldpos1*3))+1]=c[(l-(oldpos1*3))+1];
+	b[(l-(oldpos2*3))]=c[(l-(oldpos2*3))];b[(l-(oldpos2*3))+1]=c[(l-(oldpos2*3))+1];
+	}
+
+printf("///////////////////////////////////////////////////////////////////////////////\n");
+if(win(pos1,pos2))
+{
+break;
+}
+flag=getchar();
+}
+printf("Game OVER (-_-)\n"); 
+sem_destroy(&mutex);
+}
