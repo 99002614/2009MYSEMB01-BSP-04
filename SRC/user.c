@@ -64,3 +64,21 @@ if(pos2>50)
 	
 return 1;
 }
+int win(int posi1,int posi2)
+{
+
+if(posi1==50)
+{
+printf("\n CONGRATUALTIONS \" %s \" U WON THE MATCH... \n ",p1);
+printf(" \n *	*	*	*	*	*	* 	*\n");
+return(1);
+}
+if(posi2==50)
+{
+printf("\n CONGRATUALTIONS \" %s \" U WON THE MATCH... \n ",p2);
+printf(" \n +	+	+	+	+	+	+	+\n");
+return(1);
+}
+return 0;
+}
+	
