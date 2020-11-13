@@ -1,5 +1,5 @@
 run:
-	gcc user.c -o user
+	gcc user.c -lpthread -o user 
 
 clean:
 	rm *.out
