@@ -238,5 +238,43 @@ read(fd,b,152);
     printf("\nplayer one chance\n");
     return NULL; 
 } 
+int main()
+{
+strcpy(c,b);
+l=strlen(b);
+fd=open("/dev/mad",O_RDWR);
+
+sem_init(&mutex, 0, 1);
+pthread_t thread_id1, thread_id2; 
+system("clear");
+printf("welcome to snake & ladder game\n");
+printf("enter 1st player name\n");
+gets(p1);
+printf("enter 2nd player name\n");
+gets(p2);
+printf("hello %s and %s here the game begins\n\n",p1,p2);
+sleep(2);
+
+
+
+
+while(flag!='q' && pos1<=50 && pos2<=50)
+{
+system("clear");
+printf("///////////////////////////////////////////////////////////////////////////////\n");
+printf("\nplease press \" ENTER \" key to roll dice or \" KEY-- \' q \' \" to quit this game\n\n");
+
+flag=getchar();
+printf("%s",c);
+printf("\n....................................................\n");
+
+pthread_create(&thread_id1, NULL, player_one, NULL); 
+pthread_join(thread_id1, NULL);
+sleep(1);
+
+
+
+pthread_create(&thread_id2, NULL, player_two, NULL); 
+pthread_join(thread_id2, NULL);
 
 	
