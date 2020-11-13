@@ -38,3 +38,31 @@ ssize_t driv_read(struct file *fp, char __user *buf, size_t len, loff_t *off)
 	kfree(temp);
 	return b;
 }
+ssize_t driv_write (struct file *fp, const char __user *buf, size_t len, loff_t *off)
+{
+	printk("Inside %s function\n", __FUNCTION__);
+	
+	a=len;
+	
+	if(kfifo_is_full(&k))
+		{printk("storage full\n");return -ENOSPC;}
+	if(a>kfifo_avail(&k))
+		{a=kfifo_avail(&k);}
+	
+	
+	LOG *log=kmalloc(sizeof(LOG),GFP_KERNEL);
+	log->data = kmalloc(a,GFP_KERNEL);
+	
+	
+	char *temp = kmalloc(a,GFP_KERNEL);
+	copy_from_user(temp,buf,a);
+	strcpy(log->data,temp);
+	printk("\n%s\n",log->data);
+	kfifo_in(&k,temp,a);
+			
+	kfree(temp);
+	list_add_tail((log->node),&list);
+	
+	
+	return a;
+}
