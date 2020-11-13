@@ -81,4 +81,77 @@ return(1);
 }
 return 0;
 }
+void *player_one(void *vargp) 
+{ 
+    sem_wait(&mutex);    
+    sleep(1); 
+    printf("\nplayer %s playing\n",p1);
+    flag=getchar();
+    
+    again:
+    dice1=dice();
+    
+	if(dice1==6)
+	{if(check(pos1,0,dice1,0)){pos1+=dice1;printf("\ndice of %s is %d\n",p1,dice1);printf("\n%s letss go again \n\n",p1);sleep(2);goto again;}}
+	else
+	{if(check(pos1,pos2,dice1,dice2)){pos1+=dice1;printf("\n\ndice of %s is %d\n",p1,dice1);sleep(1);}}
+	
+	
+	if(pos1==pos2)
+	{
+
+	if(b[l-(pos1*3)]=='l')
+	{pos1=pos1+3;printf("\n******yeahhhh %s found a ladder .. go 4 step further******\n",p1);sleep(1);}
+	else if(b[l-(pos1*3)]=='s')
+	{pos1=pos1-4;printf("\n******uffff %s got bitten by a snake ,,go 4 step back******\n",p1);sleep(1);}
+	
+	/*if(b[l-(pos2*3)]=='l')
+	{pos2=pos2+3;printf("\n++++++yeahhhh %s found a ladder .. go 4 step further++++++\n",p2);sleep(1);}
+else if(b[l-(pos2*3)]=='s')
+	{pos2=pos2-4;printf("\n++++++uffff %s got bitten by a snake ,, go 4 step back+++++++\n",p2);sleep(1);}*/	
+
+
+	b[(l-(pos1*3))]='+';
+	b[(l-(pos2*3)+1)]='*';
+	}
+	
+	else if(pos1!=pos2)
+	{
+
+	/*if(b[l-(pos1*3)]=='l')
+	{pos1=pos1+4;printf("\n*****yeahhhh %s found a ladder ..  go 4 step furthure*****\n",p1);sleep(1);}
+	else if(b[l-(pos1*3)]=='s')
+	{pos1=pos1-4;printf("\n*****uffff %s got bitten by a snake ,, go 4 step back*****\n",p1);sleep(1);}*/
+
+	if(b[l-(pos2*3)]=='l')
+	{pos2=pos2+4;printf("\n+++++yeahhhh %s found a ladder ..  go 4 step furthure+++++\n",p2);sleep(1);}
+	else if(b[l-(pos2*3)]=='s')
+	{pos2=pos2-4;printf("\n+++++uffff %s got bitten by a snake ,,  go 4 step back+++++\n",p2);sleep(1);}
+
+	b[(l-(pos1*3))]='*';b[(l-(pos1*3))+1]='*';
+	}
+	
+printf("\n%s\n",b);
+
+	/*int oldpos1=pos1;
+	int oldpos2=pos2;
+
+	
+	if(oldpos1==oldpos2)
+	{
+	b[(l-(oldpos2*3))]=c[(l-(oldpos2*3))];b[(l-(oldpos1*3))+1]=c[(l-(oldpos1*3))+1];
+	}
+	else
+	{
+	b[(l-(oldpos1*3))]=c[(l-(oldpos1*3))];b[(l-(oldpos1*3))+1]=c[(l-(oldpos1*3))+1];
+	b[(l-(oldpos2*3))]=c[(l-(oldpos2*3))];b[(l-(oldpos2*3))+1]=c[(l-(oldpos2*3))+1];
+	}*/
+
+
+
+    
+    sem_post(&mutex);
+    printf("\nplayer two chance\n");
+    return NULL; 
+}
 	
